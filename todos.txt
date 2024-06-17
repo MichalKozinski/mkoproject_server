@@ -1,0 +1,1 @@
+to make orders and finance tables in mariadb
