@@ -133,9 +133,9 @@ def test_db():
     return jsonify(rows)
 
 
-@app.route('/')
-def home():
-    return "Hello, World!"
+# @app.route('/')
+# def home():
+#     return "Hello, World!"
     
 
 if __name__ == '__main__':

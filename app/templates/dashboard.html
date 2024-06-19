@@ -1,0 +1,10 @@
+{% extends "base.html" %}
+
+{% block content %}
+<h2>Dashboard</h2>
+<ul>
+    {% for item in menu_items %}
+        <li><a href="{{ url_for('views.' + item) }}">{{ item.replace('_', ' ').capitalize() }}</a></li>
+    {% endfor %}
+</ul>
+{% endblock %}

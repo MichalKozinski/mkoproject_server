@@ -1,8 +1,8 @@
 from flask import Flask
-from app import api  # Importowanie widoków
 from flask_login import LoginManager
 
 app = Flask(__name__)
+from app import api  # Importowanie widoków
 app.config['SECRET_KEY'] = 'your_secret_key'
 
 login_manager = LoginManager()
