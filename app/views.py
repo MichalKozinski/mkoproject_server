@@ -12,9 +12,9 @@ def home():
 @login_required
 def dashboard():
     if current_user.role == 'admin':
-        menu_items = ['add_order', 'plan', 'weekly_plan', 'add_employee', 'check_order', 'production_report', 'register']
+        menu_items = ['views.add_order', 'views.plan', 'views.weekly_plan', 'views.add_employee', 'views.check_order', 'views.production_report', 'auth.register']
     else:
-        menu_items = ['add_order', 'check_order']
+        menu_items = ['views.add_order', 'views.check_order']
     return render_template('dashboard.html', menu_items=menu_items)
 
 @views.route('/add_order')

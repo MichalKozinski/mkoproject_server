@@ -1,8 +1,8 @@
 import mysql.connector
 import os
-from flask import Flask, request, g, jsonify
-from app import app
-
+from flask import Flask, request, g, jsonify, Blueprint
+# from app import app
+api = Blueprint('api', __name__)
 
 
 #app = Flask(__name__)
@@ -93,14 +93,14 @@ def add_activity(OrderName, PositionName, ElementNumber, WorkplaceNumber, Scaner
             return 'Nie możesz dodać kolejnej aktywności dla tego elementu - praca nad tym elementem na tym stanowisku się zakończyła'
 
 
-@app.teardown_appcontext
+@api.teardown_app_request
 def connection_close(exception):
     db = g.pop('db', None)
     if db is not None:
         db.close()
 
 
-@app.route('/scan', methods=['GET'])
+@api.route('/scan', methods=['GET'])
 def handle_scan():
     # trzeba dodać sprawdzanie zalogowanie pracownika na stanowsko ID=workplacenum:skanernum. Do logowania warunki pracownika, np. jeżeli jest pracownik to skladnia kodu jest E:EmpID, w przeciwnym razie normalne skanownie elementu zlecanie. To sie odnosi do Z={code}. Jak jest E sprawdza czy dla danego workplacenum:scanernum jest jakiś pracownik--> błąd lub czy nie jest zalogowany ten sam --> wylogowanie (procedura jest taka, że ponowne zeskanowanie na danym stanowisku pracownika to wylogowanie czyli wyzerowanie CurrentScanerUser(1-5) w tabeli workplaces) else zapisanie w tym polu numeru pracownika
     code = request.args.get('Z')
@@ -125,7 +125,7 @@ def handle_scan():
     else:
         return 'Brak wymaganyh parametrów', 400
 
-@app.route('/test_db')
+@api.route('/test_db')
 def test_db():
     cursor = get_db()
     cursor.execute("SELECT * FROM activities")  
