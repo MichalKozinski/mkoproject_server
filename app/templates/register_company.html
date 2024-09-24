@@ -1,0 +1,16 @@
+{% extends "base.html" %}
+
+{% block content %}
+<h2>Register New Company</h2>
+<form method="POST">
+    <div>
+        <label for="company_name">Company Name:</label>
+        <input type="text" id="company_name" name="company_name" required>
+    </div>
+    <div>
+        <label for="company_domain">Company Domain:</label>
+        <input type="text" id="company_domain" name="company_domain" required>
+    </div>
+    <button type="submit">Register Company</button>
+</form>
+{% endblock %}
